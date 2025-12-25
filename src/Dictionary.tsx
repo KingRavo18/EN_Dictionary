@@ -17,7 +17,7 @@ export default function Dictionary(): JSX.Element{
             console.log(word);
         }
         catch(error){
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -28,14 +28,16 @@ export default function Dictionary(): JSX.Element{
                 value={searchedWord} 
                 onChange={event => setSearchedWord(event.target.value)} 
                 placeholder="Enter word"
-                className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer
+                className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer transition-[2s]
                          border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1]"
             />
             <button 
                 onClick={fetchDescribeResults}
-                className="py-0.5 px-2.5 text-[130%] cursor-pointer"
+                className="py-0.5 px-2.5 text-[130%] 
+                           cursor-pointer material-symbols-outlined transition-[2s]
+                           text-[#949494] hover:text-[#666666]"
             >
-                Find
+                search
             </button>
         </main>
     );
