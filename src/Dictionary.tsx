@@ -1,7 +1,12 @@
 import { useState, type JSX } from "react";
 
+type WordData = {
+    word: string
+}
+
 export default function Dictionary(): JSX.Element{
     const [searchedWord, setSearchedWord] = useState<string>("");
+    const [wordData, setWordData] = useState<WordData | undefined>(undefined);
 
     async function fetchDescribeResults(): Promise<void>{
         if(searchedWord.trim() === ""){
@@ -14,7 +19,10 @@ export default function Dictionary(): JSX.Element{
             }
             const data = await response.json();
             const [{ word }] = data;
-            console.log(word);
+            setWordData({
+                word: word,
+
+            });
         }
         catch(error){
             console.error(error);
@@ -22,23 +30,28 @@ export default function Dictionary(): JSX.Element{
     }
 
     return(
-        <main className="w-full flex justify-center pt-[5%]">
-            <input 
-                type="text" 
-                value={searchedWord} 
-                onChange={event => setSearchedWord(event.target.value)} 
-                placeholder="Enter word"
-                className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer transition-[2s]
-                         border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1]"
-            />
-            <button 
-                onClick={fetchDescribeResults}
-                className="py-0.5 px-2.5 text-[130%] 
-                           cursor-pointer material-symbols-outlined transition-[2s]
-                           text-[#949494] hover:text-[#666666]"
-            >
-                search
-            </button>
+        <main className="w-full flex flex-col items-center pt-[5%]">
+            <div className="flex items-center">
+                <input 
+                    type="text" 
+                    value={searchedWord} 
+                    onChange={event => setSearchedWord(event.target.value)} 
+                    placeholder="Search..."
+                    className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer transition-[2s]
+                            border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1]"
+                />
+                <button 
+                    onClick={fetchDescribeResults}
+                    className="py-0.5 px-2.5 text-[130%] 
+                            cursor-pointer material-symbols-outlined transition-[2s]
+                            text-[#949494] hover:text-[#666666]"
+                >
+                    search
+                </button>
+            </div>
+            {wordData && 
+                <div>{wordData.word}</div>
+            }
         </main>
     );
 }
