@@ -4,3 +4,9 @@ body{
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 0;
 }
+
+.dictionary_window{
+    background-color: #f2ffb7;
+    border-radius: 5px;
+    border: 2px solid #bcbd99;
+}
