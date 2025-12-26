@@ -3,6 +3,7 @@ import { useState, type JSX } from "react";
 type WordData = {
     word?: string,
     definition?: string,
+
 }
 
 export default function Dictionary(): JSX.Element{
@@ -26,7 +27,7 @@ export default function Dictionary(): JSX.Element{
                 meanings: [{ definitions: [{ definition }]}] 
             }] = data;
             setWordData({
-                word: word,
+                word: word.charAt(0).toUpperCase() + word.slice(1),
                 definition: definition,
             });
         }
@@ -60,14 +61,24 @@ export default function Dictionary(): JSX.Element{
             </div>
             {wordData && 
                 (
-                    <div className="mt-[2.5%]">
-                        <h2 className="font-bold text-center">{wordData.word}</h2>
-                        <p>{wordData.definition}</p>
+                    <div className="mt-[2.5%] text-center">
+                        <h2 className="font-bold text-[150%] 
+                                     bg-[#f2ffb7] rounded-[5px] border-2 border-[#bcbd99]"
+                        >
+                            {wordData.word}
+                        </h2>
+                        <p className="mt-[2.5%] w-75 bg-[#f2ffb7] rounded-[5px] border-2 border-[#bcbd99]">
+                            {wordData.definition}
+                        </p>
                     </div>
                 )
                 ||
                 (
-                    <p>{errorMessage}</p>
+                    <p className="w-75 mt-[2.5%] text-center 
+                                bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]"
+                    >
+                        {errorMessage}
+                    </p>
                 )
             }
         </main>
