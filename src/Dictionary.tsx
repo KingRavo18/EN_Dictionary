@@ -59,6 +59,7 @@ export default function Dictionary(): JSX.Element{
                     search
                 </button>
             </div>
+
             {!errorMessage && wordData && 
                 <div className="mt-[2.5%] text-center">
                     <h2 className="font-bold text-[150%] dictionary_window">
@@ -76,11 +77,13 @@ export default function Dictionary(): JSX.Element{
                     )}
                     </div>
             }
+
             {!wordData && errorMessage && 
                 <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]">
                     {errorMessage}
                 </p>
             }
+            
         </main>
     );
 }
