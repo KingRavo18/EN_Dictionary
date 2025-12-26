@@ -11,3 +11,8 @@ body{
     border: 2px solid #bcbd99;
     padding: 2.5px 5px;
 }
+
+@keyframes fallingAnimation{
+    from { margin-top: -200px; }
+    to { margin-top: 2.5%; }
+}

@@ -40,7 +40,7 @@ export default function Dictionary(): JSX.Element{
     }
 
     return(
-        <main className="w-full flex flex-col items-center pt-[2.5%]">
+        <main className="w-full flex flex-col items-center mt-[2.5%] [animation-name:fallingAnimation] [animation-duration:500ms]">
             <h1 className="font-bold text-[200%]">DICTONARY</h1>
             <div className="flex items-center mt-[2.5%]"> 
                 <input type="text" 
@@ -83,7 +83,7 @@ export default function Dictionary(): JSX.Element{
                     {errorMessage}
                 </p>
             }
-            
+
         </main>
     );
 }
