@@ -24,7 +24,7 @@ export default function Dictionary(): JSX.Element{
         try{
             const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`);
             if(!response.ok){
-                throw new Error("This word does not exist");
+                throw new Error("Unfortunetely, this word could not be found. Plese try another.");
             }
             const [{ word, meanings }] = await response.json();
             setErrorMessage(null);
