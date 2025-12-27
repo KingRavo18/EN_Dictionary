@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import React, { useState, type JSX } from "react";
 
 type Definition = {
     definition: string;
@@ -39,13 +39,21 @@ export default function Dictionary(): JSX.Element{
         }
     }
 
+    function searchUsingEnter(event: React.KeyboardEvent<HTMLInputElement>): void{
+        if(event.key === "Enter"){
+            fetchDescribeResults();
+        }  
+    }
+
     return(
         <main className="w-full flex flex-col items-center mt-[2.5%] [animation-name:fallingAnimation] [animation-duration:500ms]">
             <h1 className="font-bold text-[200%]">DICTONARY</h1>
+
             <div className="flex items-center mt-[2.5%]"> 
                 <input type="text" 
                        value={searchedWord} 
                        onChange={event => setSearchedWord(event.target.value)} 
+                       onKeyDown={event => searchUsingEnter(event)}
                        placeholder="Search..."
                        autoComplete="off"
                        className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer transition-[2s]
