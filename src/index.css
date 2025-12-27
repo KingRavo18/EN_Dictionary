@@ -16,3 +16,7 @@ body{
     from { margin-top: -200px; }
     to { margin-top: 2.5%; }
 }
+
+@keyframes risingAnimation{
+    
+}

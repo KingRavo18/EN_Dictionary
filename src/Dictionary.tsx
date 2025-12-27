@@ -16,25 +16,29 @@ export default function Dictionary(): JSX.Element{
     const [searchedWord, setSearchedWord] = useState<string>("");
     const [wordData, setWordData] = useState<WordData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [loadingMessage, setLoadingMessage] = useState<boolean>(false);
 
     async function fetchDescribeResults(): Promise<void>{
         if(searchedWord.trim() === "" || wordData?.word === searchedWord){
             return;
         }
+        setWordData(null);
+        setErrorMessage(null);
+        setLoadingMessage(true);
         try{
             const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`);
             if(!response.ok){
                 throw new Error("Unfortunetely, this word could not be found. Plese try another.");
             }
             const [{ word, meanings }] = await response.json();
-            setErrorMessage(null);
+            setLoadingMessage(false);
             setWordData({
                 word: word.charAt(0).toUpperCase() + word.slice(1),
                 meanings: meanings,
             });
         }
         catch(error){
-            setWordData(null);
+            setLoadingMessage(false);
             setErrorMessage((error as Error).message);
         }
     }
@@ -67,6 +71,12 @@ export default function Dictionary(): JSX.Element{
                     search
                 </button>
             </div>
+
+            {loadingMessage && 
+                <p className="w-75 mt-[2.5%] text-center">
+                    Loading...
+                </p>
+            }
 
             {!errorMessage && wordData && 
                 <div className="mt-[2.5%] text-center">
