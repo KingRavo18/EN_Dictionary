@@ -70,7 +70,7 @@ export default function Dictionary(): JSX.Element{
                         title="Search"
                         className="py-0.5 px-2.5 text-[130%] 
                         cursor-pointer material-symbols-outlined transition-[2s]
-                        text-[#949494] hover:text-[#666666]"
+                        text-[#949494] hover:text-[#666666] active:text-[#303030]"
                 >
                     search
                 </button>
