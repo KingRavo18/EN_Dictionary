@@ -59,11 +59,15 @@ export default function Dictionary(): JSX.Element{
                        onChange={event => setSearchedWord(event.target.value)} 
                        onKeyDown={searchUsingEnter}
                        placeholder="Search..."
+                       aria-label="Search the word you need defined"
+                       title="Search the word you need defined"
                        autoComplete="off"
                        className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer transition-[2s]
                        border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1]"
                 />
                 <button onClick={fetchDescribeResults}
+                        aria-label="Search"
+                        title="Search"
                         className="py-0.5 px-2.5 text-[130%] 
                         cursor-pointer material-symbols-outlined transition-[2s]
                         text-[#949494] hover:text-[#666666]"
