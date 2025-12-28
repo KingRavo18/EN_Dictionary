@@ -16,29 +16,29 @@ export default function Dictionary(): JSX.Element{
     const [searchedWord, setSearchedWord] = useState<string>("");
     const [wordData, setWordData] = useState<WordData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [loadingMessage, setLoadingMessage] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     async function fetchDescribeResults(): Promise<void>{
-        if(searchedWord.trim() === "" || wordData?.word === searchedWord){
+        if(searchedWord.trim() === "" || wordData?.word?.toLowerCase() === searchedWord.trim().toLowerCase()){
             return;
         }
         setWordData(null);
         setErrorMessage(null);
-        setLoadingMessage(true);
+        setIsLoading(true);
         try{
             const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`);
             if(!response.ok){
                 throw new Error("Unfortunetely, this word could not be found. Plese try another.");
             }
             const [{ word, meanings }] = await response.json();
-            setLoadingMessage(false);
+            setIsLoading(false);
             setWordData({
                 word: word.charAt(0).toUpperCase() + word.slice(1),
                 meanings: meanings,
             });
         }
         catch(error){
-            setLoadingMessage(false);
+            setIsLoading(false);
             setErrorMessage((error as Error).message);
         }
     }
@@ -57,7 +57,7 @@ export default function Dictionary(): JSX.Element{
                 <input type="text" 
                        value={searchedWord} 
                        onChange={event => setSearchedWord(event.target.value)} 
-                       onKeyDown={event => searchUsingEnter(event)}
+                       onKeyDown={searchUsingEnter}
                        placeholder="Search..."
                        autoComplete="off"
                        className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer transition-[2s]
@@ -72,20 +72,20 @@ export default function Dictionary(): JSX.Element{
                 </button>
             </div>
 
-            {loadingMessage && 
+            {isLoading && 
                 <p className="w-75 mt-[2.5%] text-center">
                     Loading...
                 </p>
             }
 
             {!errorMessage && wordData && 
-                <div className="mt-[2.5%] text-center">
+                <div className="mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
                     <h2 className="font-bold text-[150%] dictionary_window">
                         {wordData.word}
                     </h2>
                     {wordData.meanings?.map((meaning_item, index) => 
                         <div key={index}>
-                            <p className="mt-[5%] w-75 dictionary_window">
+                            <p className="mt-[5%] w-75 dictionary_window font-bold">
                                 {meaning_item.partOfSpeech}
                             </p>
                             <p className="w-75 dictionary_window">
@@ -97,7 +97,8 @@ export default function Dictionary(): JSX.Element{
             }
 
             {!wordData && errorMessage && 
-                <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]">
+                <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]
+                   [animation-name:risingAnimation] [animation-duration:500ms]">
                     {errorMessage}
                 </p>
             }
