@@ -62,8 +62,9 @@ export default function Dictionary(): JSX.Element{
                        aria-label="Search the word you need defined"
                        title="Search the word you need defined"
                        autoComplete="off"
-                       className="py-0.5 px-2.5 text-[130%] border-b-2 cursor-pointer transition-[2s]
-                       border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1]"
+                       className="py-0.5 px-2.5 text-[125%] border-b-2 cursor-pointer transition-[2s]
+                       border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1] 
+                       focus:outline-0 focus:border-b-[#000000] focus:px-4 focus:py-1 focus:text-[130%]"
                 />
                 <button onClick={fetchDescribeResults}
                         aria-label="Search"
