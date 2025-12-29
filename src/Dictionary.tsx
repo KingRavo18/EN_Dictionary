@@ -55,7 +55,7 @@ export default function Dictionary(): JSX.Element{
     }
 
     return(
-        <main className="w-full flex flex-col items-center mt-[2.5%] [animation-name:fallingAnimation] [animation-duration:500ms]">
+        <main className="w-full flex flex-col pb-[5%] items-center mt-[2.5%] [animation-name:fallingAnimation] [animation-duration:500ms]">
             <h1 className="font-bold text-[200%]">DICTIONARY</h1>
 
             <div className="flex items-center mt-[2.5%]"> 
@@ -92,17 +92,19 @@ export default function Dictionary(): JSX.Element{
 
             {!errorMessage && wordData && 
                 <div className="mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
-                    <h2 className="font-bold text-[150%] dictionary_window">
+                    <h2 className="font-bold text-[150%] dictionary_window rounded-[5px]">
                         {wordData.word}
                     </h2>
                     {wordData.meanings?.map((meaning_item, index) => 
                         <div key={index}>
-                            <p className="mt-[5%] w-75 dictionary_window font-bold">
+                            <p className="mt-[5%] w-75 dictionary_window font-bold rounded-tr-[5px] rounded-tl-[5px]">
                                 {meaning_item.partOfSpeech}
                             </p>
-                            <p className="w-75 dictionary_window">
-                                {meaning_item.definitions[0].definition}
-                            </p>
+                            {meaning_item.definitions?.map((definition_item, index) => 
+                                <p key={index} className="w-75 dictionary_window last:rounded-br-[5px] last:rounded-bl-[5px]">
+                                    {definition_item.definition}
+                                </p>
+                            )}
                         </div>
                     )}
                     </div>
