@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from "react";
+import React, { useEffect, useRef, useState, type JSX } from "react";
 
 type Definition = {
     definition: string;
@@ -17,6 +17,11 @@ export default function Dictionary(): JSX.Element{
     const [wordData, setWordData] = useState<WordData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const searchInputRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        searchInputRef.current?.focus();
+    }, []);
 
     async function fetchDescribeResults(): Promise<void>{
         if(searchedWord.trim() === "" || wordData?.word?.toLowerCase() === searchedWord.trim().toLowerCase()){
@@ -55,6 +60,7 @@ export default function Dictionary(): JSX.Element{
 
             <div className="flex items-center mt-[2.5%]"> 
                 <input type="text" 
+                       ref={searchInputRef}
                        value={searchedWord} 
                        onChange={event => setSearchedWord(event.target.value)} 
                        onKeyDown={searchUsingEnter}
