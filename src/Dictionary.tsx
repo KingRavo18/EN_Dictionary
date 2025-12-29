@@ -33,7 +33,7 @@ export default function Dictionary(): JSX.Element{
         try{
             const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`);
             if(!response.ok){
-                throw new Error("Unfortunetely, this word could not be found. Plese try another.");
+                throw new Error("Unfortunately, this word could not be found. Please try another.");
             }
             const [{ word, meanings }] = await response.json();
             setIsLoading(false);
@@ -73,6 +73,7 @@ export default function Dictionary(): JSX.Element{
                        focus:outline-0 focus:border-b-[#000000] focus:px-4 focus:py-1 focus:text-[130%]"
                 />
                 <button onClick={fetchDescribeResults}
+                        disabled={isLoading}
                         aria-label="Search"
                         title="Search"
                         className="py-0.5 px-2.5 text-[130%] 
