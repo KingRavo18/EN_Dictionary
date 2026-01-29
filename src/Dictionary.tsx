@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type JSX } from "react";
+import React, { useState } from "react";
 
 type Definition = {
     definition: string;
@@ -12,7 +12,7 @@ type WordData = {
     meanings?: Meaning[];
 }
 
-export default function Dictionary(): JSX.Element{
+export default function Dictionary(){
     const [searchedWord, setSearchedWord] = useState<string>("");
     const [wordData, setWordData] = useState<WordData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
