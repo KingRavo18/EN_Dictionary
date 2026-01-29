@@ -16,12 +16,7 @@ export default function Dictionary(): JSX.Element{
     const [searchedWord, setSearchedWord] = useState<string>("");
     const [wordData, setWordData] = useState<WordData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const searchInputRef = useRef<HTMLInputElement | null>(null);
-
-    useEffect(() => {
-        searchInputRef.current?.focus();
-    }, []);
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     async function fetchDescribeResults(): Promise<void>{
         if(searchedWord.trim() === "" || wordData?.word?.toLowerCase() === searchedWord.trim().toLowerCase()){
@@ -59,8 +54,7 @@ export default function Dictionary(): JSX.Element{
             <h1 className="font-bold text-[200%]">DICTIONARY</h1>
 
             <div className="flex items-center mt-[2.5%]"> 
-                <input type="text" 
-                       ref={searchInputRef}
+                <input type="text"
                        value={searchedWord} 
                        onChange={event => setSearchedWord(event.target.value)} 
                        onKeyDown={searchUsingEnter}
@@ -68,6 +62,7 @@ export default function Dictionary(): JSX.Element{
                        aria-label="Search the word you need defined"
                        title="Search the word you need defined"
                        autoComplete="off"
+                       autoFocus
                        className="py-0.5 px-2.5 text-[125%] border-b-2 cursor-pointer transition-[2s]
                        border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1] 
                        focus:outline-0 focus:border-b-[#000000] focus:px-4 focus:py-1 focus:text-[130%]"
