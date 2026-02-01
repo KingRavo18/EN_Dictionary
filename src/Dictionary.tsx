@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState, type JSX } from "react";
+import React, { useState } from "react";
+import { SyncLoader } from "react-spinners";
 
 type Definition = {
     definition: string;
@@ -12,16 +13,11 @@ type WordData = {
     meanings?: Meaning[];
 }
 
-export default function Dictionary(): JSX.Element{
+export default function Dictionary(){
     const [searchedWord, setSearchedWord] = useState<string>("");
     const [wordData, setWordData] = useState<WordData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const searchInputRef = useRef<HTMLInputElement | null>(null);
-
-    useEffect(() => {
-        searchInputRef.current?.focus();
-    }, []);
 
     async function fetchDescribeResults(): Promise<void>{
         if(searchedWord.trim() === "" || wordData?.word?.toLowerCase() === searchedWord.trim().toLowerCase()){
@@ -36,15 +32,16 @@ export default function Dictionary(): JSX.Element{
                 throw new Error("Unfortunately, this word could not be found. Please try another.");
             }
             const [{ word, meanings }] = await response.json();
-            setIsLoading(false);
             setWordData({
                 word: word.charAt(0).toUpperCase() + word.slice(1),
                 meanings: meanings,
             });
         }
         catch(error){
-            setIsLoading(false);
             setErrorMessage((error as Error).message);
+        }
+        finally{
+            setIsLoading(false);
         }
     }
 
@@ -54,13 +51,34 @@ export default function Dictionary(): JSX.Element{
         }  
     }
 
+    const messages = {
+        intro: (
+            <p className="w-45 mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
+                Please insert a word you want a description for.
+            </p>
+        ),
+        loading: (
+            <SyncLoader 
+                size={5} 
+                color="black" 
+                style={{paddingTop: "3rem"}}
+            />
+        ),
+        error: (
+            <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]
+                [animation-name:risingAnimation] [animation-duration:500ms]"
+            >
+                {errorMessage}
+            </p>
+        )
+    }
+
     return(
         <main className="w-full flex flex-col pb-[5%] items-center mt-[2.5%] [animation-name:fallingAnimation] [animation-duration:500ms]">
             <h1 className="font-bold text-[200%]">DICTIONARY</h1>
 
             <div className="flex items-center mt-[2.5%]"> 
-                <input type="text" 
-                       ref={searchInputRef}
+                <input type="text"
                        value={searchedWord} 
                        onChange={event => setSearchedWord(event.target.value)} 
                        onKeyDown={searchUsingEnter}
@@ -68,6 +86,7 @@ export default function Dictionary(): JSX.Element{
                        aria-label="Search the word you need defined"
                        title="Search the word you need defined"
                        autoComplete="off"
+                       autoFocus
                        className="py-0.5 px-2.5 text-[125%] border-b-2 cursor-pointer transition-[2s]
                        border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1] 
                        focus:outline-0 focus:border-b-[#000000] focus:px-4 focus:py-1 focus:text-[130%]"
@@ -84,11 +103,9 @@ export default function Dictionary(): JSX.Element{
                 </button>
             </div>
 
-            {isLoading && 
-                <p className="w-75 mt-[2.5%] text-center">
-                    Loading...
-                </p>
-            }
+            {!isLoading && !errorMessage && !wordData && messages.intro}
+            {isLoading && !wordData && messages.loading}
+            {!wordData && errorMessage && messages.error}
 
             {!errorMessage && wordData && 
                 <div className="mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
@@ -107,16 +124,8 @@ export default function Dictionary(): JSX.Element{
                             )}
                         </div>
                     )}
-                    </div>
+                </div>
             }
-
-            {!wordData && errorMessage && 
-                <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]
-                   [animation-name:risingAnimation] [animation-duration:500ms]">
-                    {errorMessage}
-                </p>
-            }
-
         </main>
     );
 }
