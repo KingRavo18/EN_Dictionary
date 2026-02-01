@@ -53,7 +53,7 @@ export default function Dictionary(){
 
     const messages = {
         intro: (
-            <p className="w-45 mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
+            <p className="w-40 mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
                 Please input the word you want a description for.
             </p>
         ),
