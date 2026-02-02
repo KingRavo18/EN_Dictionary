@@ -106,7 +106,7 @@ export default function Dictionary(){
             {isLoading && !wordData && messages.loading}
             {!wordData && errorMessage && messages.error}
 
-            {!errorMessage && wordData && 
+            {!errorMessage && wordData && !isLoading && 
                 <div className="mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
                     <h2 className="font-bold text-[150%] dictionary_window rounded-[5px]">
                         {wordData.word}
