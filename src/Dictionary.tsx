@@ -23,7 +23,6 @@ export default function Dictionary(){
         if(searchedWord.trim() === "" || wordData?.word?.toLowerCase() === searchedWord.trim().toLowerCase()){
             return;
         }
-        setWordData(null);
         setErrorMessage(null);
         setIsLoading(true);
         try{
