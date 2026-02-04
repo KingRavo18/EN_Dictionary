@@ -46,7 +46,7 @@ export default function Dictionary(){
     }
 
     function searchUsingEnter(event: React.KeyboardEvent<HTMLInputElement>): void{
-        if(event.key === "Enter"){
+        if(event.key === "Enter" && !isLoading){
             fetchDescribeResults();
         }  
     }
@@ -81,7 +81,7 @@ export default function Dictionary(){
                 <input type="text"
                        value={searchedWord} 
                        onChange={event => setSearchedWord(event.target.value)} 
-                       onKeyDown={searchUsingEnter}
+                       onKeyUp={searchUsingEnter}
                        placeholder="Search..."
                        aria-label="Search the word you need defined"
                        title="Search the word you need defined"
