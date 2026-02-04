@@ -26,7 +26,7 @@ export default function Dictionary(){
         setErrorMessage(null);
         setIsLoading(true);
         try{
-            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`);
+            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(searchedWord)}`);
             if(!response.ok){
                 throw new Error("Unfortunately, this word could not be found. Please try another.");
             }
@@ -37,6 +37,7 @@ export default function Dictionary(){
             });
         }
         catch(error){
+            setWordData(null);
             setErrorMessage((error as Error).message);
         }
         finally{
@@ -103,10 +104,10 @@ export default function Dictionary(){
             </div>
 
             {!isLoading && !errorMessage && !wordData && messages.intro}
-            {isLoading && !wordData && messages.loading}
-            {!wordData && errorMessage && messages.error}
+            {isLoading && messages.loading}
+            {!isLoading && errorMessage && !wordData && messages.error}
 
-            {!errorMessage && wordData && !isLoading && 
+            {!isLoading && !errorMessage && wordData && 
                 <div className="mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
                     <h2 className="font-bold text-[150%] dictionary_window rounded-[5px]">
                         {wordData.word}
