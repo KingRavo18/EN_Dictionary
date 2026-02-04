@@ -13,6 +13,38 @@ type WordData = {
     meanings?: Meaning[];
 }
 
+function DictionaryIntro(){
+    return(
+        <p className="w-55 mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
+            Please input the word you want a description for.
+        </p>
+    )
+}
+
+function DictionarySpinner(){
+    return(
+        <SyncLoader 
+            size={5} 
+            color="black" 
+            style={{paddingTop: "3rem"}}
+        />
+    )
+}
+
+type DictionaryErrorProps = {
+    errorMessage: string;
+}
+
+function DictionaryError({ errorMessage }: DictionaryErrorProps){
+    return(
+        <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]
+            [animation-name:risingAnimation] [animation-duration:500ms]"
+        >
+            {errorMessage}
+        </p>
+    )
+}
+
 export default function Dictionary(){
     const [searchedWord, setSearchedWord] = useState<string>("");
     const [wordData, setWordData] = useState<WordData | null>(null);
@@ -51,28 +83,6 @@ export default function Dictionary(){
         }  
     }
 
-    const messages = {
-        intro: (
-            <p className="w-55 mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
-                Please input the word you want a description for.
-            </p>
-        ),
-        loading: (
-            <SyncLoader 
-                size={5} 
-                color="black" 
-                style={{paddingTop: "3rem"}}
-            />
-        ),
-        error: (
-            <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]
-                [animation-name:risingAnimation] [animation-duration:500ms]"
-            >
-                {errorMessage}
-            </p>
-        )
-    }
-
     return(
         <main className="w-full flex flex-col pb-[5%] items-center mt-[2.5%] [animation-name:fallingAnimation] [animation-duration:500ms]">
             <h1 className="font-bold text-[200%]">DICTIONARY</h1>
@@ -103,9 +113,9 @@ export default function Dictionary(){
                 </button>
             </div>
 
-            {!isLoading && !errorMessage && !wordData && messages.intro}
-            {isLoading && messages.loading}
-            {!isLoading && errorMessage && !wordData && messages.error}
+            {!isLoading && !errorMessage && !wordData && <DictionaryIntro />}
+            {isLoading && <DictionarySpinner />}
+            {!isLoading && errorMessage && !wordData && <DictionaryError errorMessage={errorMessage}/>}
 
             {!isLoading && !errorMessage && wordData && 
                 <div className="mt-[2.5%] text-center [animation-name:risingAnimation] [animation-duration:500ms]">
