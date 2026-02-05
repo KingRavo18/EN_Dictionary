@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { SyncLoader } from "react-spinners";
 import DictionaryIntro from "./Components/IntroMessage";
+import DictionarySpinner from "./Components/LoadingScroll";
 
 type Definition = {
     definition: string;
@@ -12,16 +12,6 @@ type Meaning = {
 type WordData = {
     word?: string;
     meanings?: Meaning[];
-}
-
-function DictionarySpinner(){
-    return(
-        <SyncLoader 
-            size={5} 
-            color="black" 
-            style={{paddingTop: "3rem"}}
-        />
-    )
 }
 
 type DictionaryErrorProps = {
