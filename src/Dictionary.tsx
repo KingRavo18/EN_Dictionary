@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DictionaryIntro from "./Components/IntroMessage";
 import DictionarySpinner from "./Components/LoadingScroll";
+import DictionaryError from "./Components/ErrorMessage";
 
 type Definition = {
     definition: string;
@@ -12,20 +13,6 @@ type Meaning = {
 type WordData = {
     word?: string;
     meanings?: Meaning[];
-}
-
-type DictionaryErrorProps = {
-    errorMessage: string;
-}
-
-function DictionaryError({ errorMessage }: DictionaryErrorProps){
-    return(
-        <p className="w-75 mt-[2.5%] text-center bg-[#fce0db] rounded-[5px] border-2 border-[#fc8772]
-            [animation-name:risingAnimation] [animation-duration:500ms]"
-        >
-            {errorMessage}
-        </p>
-    )
 }
 
 export default function Dictionary(){
