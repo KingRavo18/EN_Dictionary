@@ -68,8 +68,8 @@ export default function Dictionary(){
                        autoComplete="off"
                        autoFocus
                        className="py-0.5 px-2.5 text-[125%] border-b-2 cursor-pointer transition-[2s]
-                       border-b-[#bbbbbb] hover:border-b-[#7c7c7c] hover:bg-[#f1f1f1] 
-                       focus:outline-0 focus:border-b-[#000000] focus:px-4 focus:py-1 focus:text-[130%]"
+                       border-b-[--text-color] hover:border-b-[#7c7c7c] 
+                       focus:outline-0 focus:border-b-[--text-color] focus:px-4 focus:py-1 focus:text-[130%]"
                 />
                 <button onClick={fetchDescribeResults}
                         disabled={isLoading}

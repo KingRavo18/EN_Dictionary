@@ -3,8 +3,8 @@
 :root{
     color-scheme: light dark;
     --background-color: light-dark(rgb(231, 231, 231), rgb(39, 39, 39));
-    --text-color: light-dark(black, white);
-    --dictionary-window-color: light-dark(#f2ffb7, #8d946c);
+    --text-color: light-dark(black, rgb(255, 255, 255));
+    --dictionary-window-color: light-dark(rgb(242, 255, 183), rgb(82, 73, 43));
 }
 
 *{
@@ -19,7 +19,7 @@ body{
 
 .dictionary_window{
     background-color: var(--dictionary-window-color);
-    border: 2px solid #bcbd99;
+    border: 2px solid var(--dictionary-window-color);
     padding: 2.5px 5px;
 }
 
