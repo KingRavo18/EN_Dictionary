@@ -2,10 +2,12 @@
 
 :root{
     color-scheme: light dark;
+    --text-color: light-dark(black, white);
 }
 
 *{
     font-family: Georgia, 'Times New Roman', Times, serif;
+    color: var(--text-color);
 }
 
 body{
