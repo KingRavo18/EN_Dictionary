@@ -5,6 +5,7 @@
     --background-color: light-dark(rgb(231, 231, 231), rgb(39, 39, 39));
     --text-color: light-dark(black, rgb(255, 255, 255));
     --dictionary-window-color: light-dark(rgb(242, 255, 183), rgb(82, 73, 43));
+    --dictionary-window-border-color: light-dark();
 }
 
 *{
