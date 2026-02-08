@@ -20,7 +20,7 @@ body{
 
 .dictionary_window{
     background-color: var(--dictionary-window-color);
-    border: 2px solid var(--dictionary-window-color);
+    border: 2px solid var(--dictionary-window-border-color);
     padding: 2.5px 5px;
 }
 
