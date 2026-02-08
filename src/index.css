@@ -7,6 +7,7 @@
     --dictionary-window-color: light-dark(rgb(242, 255, 183), rgb(82, 73, 43));
     --dictionary-window-border-color: light-dark(rgb(202, 212, 153), rgb(133, 118, 69));
     --error-message-background-color: light-dark();
+    --error-message-border-color: light-dark();
 }
 
 *{
