@@ -65,19 +65,21 @@ export default function Dictionary(){
                        placeholder="Search..."
                        aria-label="Search the word you need defined"
                        title="Search the word you need defined"
-                       autoComplete="off"
+                       id="search-input"
                        autoFocus
-                       className="py-0.5 px-2.5 text-[125%] border-b-2 cursor-pointer transition-[2s]
-                       border-b-[--text-color] hover:border-b-[#7c7c7c] 
-                       focus:outline-0 focus:border-b-[--text-color] focus:px-4 focus:py-1 focus:text-[130%]"
+                       className="py-0.5 px-2.5 mr-1.25 text-[125%] border-b-2 cursor-pointer transition-[2s]
+                       border-b-(--text-color) hover:border-b-[#7c7c7c] 
+                       focus:outline-0 focus:border-b-(--text-color) focus:px-4 focus:py-1 focus:text-[130%]"
                 />
                 <button onClick={fetchDescribeResults}
                         disabled={isLoading}
                         aria-label="Search"
                         title="Search"
-                        className="py-0.5 px-2.5 text-[130%] 
+                        className="p-1 text-[130%] rounded-[50%]
                         cursor-pointer material-symbols-outlined transition-[2s]
-                        text-[#949494] hover:text-[#666666] active:text-[#303030]"
+                        text-[#949494] hover:text-[#666666] 
+                        hover:bg-(--search-button-hover-color) active:bg-[#636363]
+                        active:text-[#303030]"
                 >
                     search
                 </button>
